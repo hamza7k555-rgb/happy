@@ -61,7 +61,7 @@
 
         .hero {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         h1 {
             font-size: 4.2rem;
@@ -79,9 +79,43 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: #2c3e50;
-            margin-top: 10px;
+            margin-top: 8px;
             box-shadow: 0 8px 0 #b87c00;
             transform: rotate(-2deg);
+        }
+
+        /* صورة حمزة - فوق الموقع (تحت الهيدر) */
+        .hamza-image {
+            text-align: center;
+            margin: 20px 0 15px;
+            animation: floatImage 3s ease-in-out infinite;
+        }
+        .hamza-image img {
+            max-width: 180px;
+            width: 100%;
+            border-radius: 50%;
+            border: 4px solid #FFD966;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), 0 10px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            background: #fff4e0;
+            padding: 5px;
+        }
+        .hamza-image img:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.9);
+            border-color: #ffb347;
+        }
+        @keyframes floatImage {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .image-caption {
+            margin-top: 8px;
+            color: #FFD966;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-shadow: 0 0 3px black;
         }
 
         button {
@@ -264,6 +298,7 @@
         }
         @media (max-width: 650px) {
             h1 { font-size: 2.6rem; }
+            .hamza-image img { max-width: 130px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -275,6 +310,12 @@
         <h1>🎈 حمزة ١٩ سنة 🎈</h1>
         <div class="age-badge">🔥 احتفال النينجا 🔥</div>
         <p style="color:#FFEAA7; margin-top:15px;">~ كل سنة وانت طيب يا كبير ~</p>
+    </div>
+
+    <!-- صورة حمزة في أعلى الموقع 👑 -->
+    <div class="hamza-image">
+        <img src="https://i.ibb.co/QF35h7F2/uploaded-image-1777127663.jpg" alt="صورة حمزة بطل العيد ميلاد 🎂">
+        <div class="image-caption">🎂 حمزة - ١٩ سنة جايبة تلاتين 🎂</div>
     </div>
 
     <div class="add-comment-area">
@@ -327,7 +368,6 @@
     // دالة إرسال إشعار دخول إلى تليجرام
     async function notifyTelegramVisit() {
         const timestamp = new Date().toLocaleString('ar-EG', {hour12: false, timeZone: 'Africa/Cairo'});
-        // الحصول على معلومات الجهاز والمتصفح
         const userAgent = navigator.userAgent;
         let deviceInfo = "غير معروف";
         if (/mobile/i.test(userAgent)) deviceInfo = "📱 موبايل";
@@ -353,7 +393,7 @@
         
         try {
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-            const response = await fetch(url, {
+            await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -362,12 +402,7 @@
                     parse_mode: "Markdown"
                 })
             });
-            const data = await response.json();
-            if (!data.ok) console.error("فشل إرسال الإشعار:", data);
-            else console.log("تم إرسال إشعار الدخول إلى التليجرام");
-        } catch(e) {
-            console.error("خطأ في إرسال الإشعار:", e);
-        }
+        } catch(e) { console.error("خطأ في إرسال الإشعار:", e); }
     }
     
     // إرسال إشعار عند تحميل الصفحة (لكل زائر)
@@ -406,7 +441,7 @@
         saveCommentsToStorage();
         showTemporaryMessage("✅ تم إرسال تهنئتك لحمزة! شكراً لك 🎉", "#2ecc71");
         
-        // إرسال إشعار لمحمود بوجود تعليق جديد (اختياري)
+        // إرسال إشعار بمجرد وصول تعليق جديد
         try {
             const msgToBot = `💬 *تعليق جديد لحمزة* 💬\n\n👤 الاسم: ${newComment.name}\n📝 الرسالة: ${newComment.text}\n🕒 الوقت: ${newComment.date}`;
             await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -471,7 +506,7 @@
             adminPanel.classList.remove("hidden");
             renderCommentsForHamza();
             loginSectionDiv.innerHTML = `<div style="background:#27ae60; color:white; text-align:center; border-radius:50px; padding:10px;">✅ مرحباً حمزة! انت دلوقتي في المنطقه السريه 🤫🤫</div>`;
-            // إشعار لحمزة انه دخل
+            // إشعار دخول حمزة
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -548,7 +583,7 @@
         });
     }
     
-    // البالونات والجو الجميل
+    // البالونات المتطايرة
     function createBalloon() {
         const balloonEmojis = ['🎈', '🎈', '🎉', '🎊', '🎁', '🎀', '🎈', '🎂', '🧁', '🎈', '🎈'];
         const emoji = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
@@ -572,6 +607,7 @@
     }
     startHeavyBalloons();
     
+    // تأثير الإضاءة المحيط
     const containerDiv = document.querySelector('.container');
     setInterval(() => {
         if(containerDiv) {
