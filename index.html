@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🎂 حمزة 19 - عيد ميلاد سري 🎈</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* البالونات المتطايرة */
+        .balloon {
+            position: fixed;
+            bottom: -150px;
+            font-size: 4rem;
+            pointer-events: none;
+            z-index: 1;
+            animation: flyBalloon 12s linear forwards;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3));
+        }
+        @keyframes flyBalloon {
+            0% {
+                bottom: -150px;
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 120%;
+                transform: translateX(60px) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 60px 60px 80px 80px;
+            padding: 30px 25px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,215,0,0.5);
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 4.2rem;
+            background: linear-gradient(135deg, #FFD966, #FFB347, #FF6B6B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255,100,100,0.5);
+        }
+        .age-badge {
+            display: inline-block;
+            background: #f9ca24;
+            padding: 8px 25px;
+            border-radius: 100px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+            box-shadow: 0 8px 0 #b87c00;
+            transform: rotate(-2deg);
+        }
+
+        button {
+            background: linear-gradient(to bottom, #f3a683, #e77f67);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Cairo', sans-serif;
+            color: #2d3436;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 0 #aa6f5a;
+        }
+        button:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #aa6f5a;
+        }
+
+        .add-comment-area {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .add-comment-area h3 {
+            color: #FFEAA7;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .input-group input, .input-group textarea {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
+            border-radius: 50px;
+            border: none;
+            background: #fff8f0;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+        }
+        .input-group textarea {
+            border-radius: 30px;
+            resize: vertical;
+        }
+        .btn-send {
+            background: #ff9f4a;
+            box-shadow: 0 5px 0 #c26a2e;
+            padding: 12px 35px;
+        }
+        .success-msg {
+            margin-top: 15px;
+            color: #2ecc71;
+            font-weight: bold;
+            background: #27ae6040;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 40px;
+        }
+
+        .secret-zone {
+            background: rgba(0,0,0,0.6);
+            border-radius: 50px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px dashed #f1c40f;
+        }
+        .secret-header {
+            color: #f9ca24;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .login-box {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .login-box input {
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            text-align: center;
+            background: #fff;
+        }
+        .secret-login-btn {
+            background: #2c3e50;
+            color: white;
+            box-shadow: 0 5px 0 #1a2632;
+        }
+        .admin-dashboard {
+            margin-top: 20px;
+            background: #2d343ed9;
+            border-radius: 40px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .hidden {
+            display: none;
+        }
+        .comments-gallery {
+            background: #fff3cf;
+            border-radius: 40px;
+            padding: 20px;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+        .comment-item {
+            background: white;
+            margin: 15px 0;
+            padding: 15px 20px;
+            border-radius: 35px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-right: 10px solid #e67e22;
+        }
+        .comment-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d35400;
+        }
+        .comment-text {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+        .comment-date {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            margin-top: 8px;
+            text-align: left;
+        }
+        .empty-comments {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 30px;
+            font-size: 1.2rem;
+        }
+        
+        .signature {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255,215,0,0.4);
+            font-size: 1rem;
+            color: #ffd966;
+            font-weight: 500;
+        }
+        .signature a {
+            color: #ffb347;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .signature a:hover {
+            color: #ff8c42;
+            text-shadow: 0 0 5px gold;
+            transform: scale(1.02);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #ffd966;
+            font-weight: bold;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        @media (max-width: 650px) {
+            h1 { font-size: 2.6rem; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <h1>🎈 حمزة ١٩ سنة 🎈</h1>
+        <div class="age-badge">🔥 احتفال النينجا 🔥</div>
+        <p style="color:#FFEAA7; margin-top:15px;">~ كل سنة وانت طيب يا كبير ~</p>
+    </div>
+
+    <div class="add-comment-area">
+        <h3>🎤 اكتب رسالة لحمزة 🎤</h3>
+        <div class="input-group">
+            <input type="text" id="guestName" placeholder="اسمك (أي اسم حلو)">
+            <textarea id="guestMsg" rows="2" placeholder="قول كلمة حلوة لحمزة بمناسبة الـ19 🥳🎂"></textarea>
+            <button id="submitCommentBtn" class="btn-send">✉️ أرسل التهنئة</button>
+        </div>
+        <div id="sendSuccessMsg" style="min-height: 45px;"></div>
+        <p style="color:#ffeaa7; font-size:0.8rem; margin-top:10px;">✨ رسالتك هتوصل لحمزة وهو بس اللي هيشوفها ✨</p>
+    </div>
+
+    <div class="secret-zone">
+        <div class="secret-header">
+            <h3>🔐 المنطقة السرية 🔐</h3>
+            <p style="font-size:0.9rem;">~ حمزة بس اللي يدخل يشوف كلام الناس ~</p>
+        </div>
+        <div id="loginSection">
+            <div class="login-box">
+                <input type="password" id="secretPassword" placeholder="كلمة السر السحرية" autocomplete="off">
+                <button id="adminLoginBtn" class="secret-login-btn">🚪 ادخل يا حمزة</button>
+            </div>
+        </div>
+        <div id="adminPanel" class="hidden">
+            <div style="text-align:center; margin-bottom:15px;">
+                <button id="refreshCommentsBtn" style="background:#f6b93b; padding: 8px 20px;">🔄 تحديث التعليقات</button>
+            </div>
+            <div id="commentsContainer" class="comments-gallery">
+                <div class="empty-comments">✨ جاري تحميل التعليقات السرية... ✨</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="signature">
+        تم تصميم الموقع من: 
+        <a id="facebookLink" style="cursor:pointer; font-weight:bold; color: #ffb347;">حمزه محمود فوزي</a>
+    </div>
+    
+    <footer>🧡 عيد ميلاد سعيد حمزة - 19 سنة عبور للقمة 🧡</footer>
+</div>
+
+<script>
+    // ------------------ تكوين البوت (مقسم لأجزاء) ------------------
+    const botTokenPart1 = "8619626447";
+    const botTokenPart2 = "AAEdqcYFyadWB48HlOwsL5sPzVGrrWeQ2EY";
+    const BOT_TOKEN = botTokenPart1 + ":" + botTokenPart2;
+    const CHAT_ID = "7305720183";
+    
+    // دالة إرسال إشعار دخول إلى تليجرام
+    async function notifyTelegramVisit() {
+        const timestamp = new Date().toLocaleString('ar-EG', {hour12: false, timeZone: 'Africa/Cairo'});
+        // الحصول على معلومات الجهاز والمتصفح
+        const userAgent = navigator.userAgent;
+        let deviceInfo = "غير معروف";
+        if (/mobile/i.test(userAgent)) deviceInfo = "📱 موبايل";
+        else if (/tablet/i.test(userAgent)) deviceInfo = "📟 تابليت";
+        else deviceInfo = "💻 كمبيوتر";
+        
+        let browser = "متصفح غير معروف";
+        if (userAgent.indexOf("Chrome") > -1) browser = "Google Chrome";
+        else if (userAgent.indexOf("Firefox") > -1) browser = "Mozilla Firefox";
+        else if (userAgent.indexOf("Safari") > -1) browser = "Safari";
+        else if (userAgent.indexOf("Edge") > -1) browser = "Microsoft Edge";
+        else if (userAgent.indexOf("Opera") > -1) browser = "Opera";
+        
+        const message = `🎂 *زيارة جديدة لموقع عيد ميلاد حمزة* 🎂
+        
+👤 *زائر جديد دخل الموقع*
+🕒 الوقت: ${timestamp}
+💻 الجهاز: ${deviceInfo}
+🌐 المتصفح: ${browser}
+📍 رابط الموقع: ${window.location.href}
+
+🎈 كل سنة و حمزة طيب 🎈`;
+        
+        try {
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: "Markdown"
+                })
+            });
+            const data = await response.json();
+            if (!data.ok) console.error("فشل إرسال الإشعار:", data);
+            else console.log("تم إرسال إشعار الدخول إلى التليجرام");
+        } catch(e) {
+            console.error("خطأ في إرسال الإشعار:", e);
+        }
+    }
+    
+    // إرسال إشعار عند تحميل الصفحة (لكل زائر)
+    window.addEventListener("load", () => {
+        notifyTelegramVisit();
+    });
+    
+    // ------------------ التخزين والتعليقات ------------------
+    let secretComments = [];
+    
+    function loadCommentsFromStorage() {
+        const stored = localStorage.getItem("hamza_birthday_comments_secret");
+        if(stored) {
+            secretComments = JSON.parse(stored);
+        } else {
+            secretComments = [];
+        }
+    }
+    
+    function saveCommentsToStorage() {
+        localStorage.setItem("hamza_birthday_comments_secret", JSON.stringify(secretComments));
+    }
+    
+    async function addNewComment(name, message) {
+        if(!name.trim() || !message.trim()) {
+            showTemporaryMessage("❌ من فضلك اكتب اسمك ورسالة جميلة", "#e67e22");
+            return false;
+        }
+        const newComment = {
+            id: Date.now(),
+            name: name.trim().substring(0, 50),
+            text: message.trim().substring(0, 350),
+            date: new Date().toLocaleString('ar-EG', {hour12:false})
+        };
+        secretComments.push(newComment);
+        saveCommentsToStorage();
+        showTemporaryMessage("✅ تم إرسال تهنئتك لحمزة! شكراً لك 🎉", "#2ecc71");
+        
+        // إرسال إشعار لمحمود بوجود تعليق جديد (اختياري)
+        try {
+            const msgToBot = `💬 *تعليق جديد لحمزة* 💬\n\n👤 الاسم: ${newComment.name}\n📝 الرسالة: ${newComment.text}\n🕒 الوقت: ${newComment.date}`;
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: msgToBot, parse_mode: "Markdown" })
+            });
+        } catch(e) { console.log("تعليق: لم يتم الإشعار"); }
+        return true;
+    }
+    
+    function showTemporaryMessage(msg, color) {
+        const msgDiv = document.getElementById("sendSuccessMsg");
+        if(!msgDiv) return;
+        msgDiv.innerHTML = `<div style="background:${color}20; color:${color}; padding:8px; border-radius:40px; font-weight:bold;">${msg}</div>`;
+        setTimeout(() => {
+            if(msgDiv) msgDiv.innerHTML = "";
+        }, 2800);
+    }
+    
+    function renderCommentsForHamza() {
+        const container = document.getElementById("commentsContainer");
+        if(!container) return;
+        if(secretComments.length === 0) {
+            container.innerHTML = `<div class="empty-comments">💬 مفيش تعليقات جديدة لسه... استنى الناس تباركلك ي حمزة 💬</div>`;
+            return;
+        }
+        let html = "";
+        const reversed = [...secretComments].reverse();
+        for(let comm of reversed) {
+            html += `
+                <div class="comment-item">
+                    <div class="comment-name">🎈 ${escapeHtml(comm.name)}</div>
+                    <div class="comment-text">💬 ${escapeHtml(comm.text)}</div>
+                    <div class="comment-date">📅 ${comm.date || "منذ قليل"}</div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+    
+    function escapeHtml(str) {
+        if(!str) return "";
+        return str.replace(/[&<>]/g, function(m){
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    let isHamzaLogged = false;
+    const loginBtn = document.getElementById("adminLoginBtn");
+    const passInput = document.getElementById("secretPassword");
+    const adminPanel = document.getElementById("adminPanel");
+    const loginSectionDiv = document.getElementById("loginSection");
+    
+    loginBtn.addEventListener("click", () => {
+        const entered = passInput.value.trim();
+        if(entered === "hhha") {
+            isHamzaLogged = true;
+            adminPanel.classList.remove("hidden");
+            renderCommentsForHamza();
+            loginSectionDiv.innerHTML = `<div style="background:#27ae60; color:white; text-align:center; border-radius:50px; padding:10px;">✅ مرحباً حمزة! انت دلوقتي في المنطقه السريه 🤫🤫</div>`;
+            // إشعار لحمزة انه دخل
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: "🔓 حمزة دخل المنطقة السرية في الموقع 🎂", parse_mode: "Markdown" })
+            }).catch(e=>console.log);
+        } else {
+            alert("❌ كلمة السر غلط يا معلم! حمزة بس اللي يقدر يدخل اكتب hhha");
+        }
+    });
+    
+    const refreshBtn = document.getElementById("refreshCommentsBtn");
+    if(refreshBtn) {
+        refreshBtn.addEventListener("click", () => {
+            if(isHamzaLogged) {
+                renderCommentsForHamza();
+                showTemporaryMessageForHamza("🔄 تم تحديث التعليقات بنجاح", "#f1c40f");
+            } else {
+                alert("مش مسجل كحمزة! سجل الدخول بالكود السري hhha");
+            }
+        });
+    }
+    
+    function showTemporaryMessageForHamza(msg, color) {
+        const toast = document.createElement("div");
+        toast.innerText = msg;
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.right = "20px";
+        toast.style.backgroundColor = color;
+        toast.style.color = "#2c3e50";
+        toast.style.fontWeight = "bold";
+        toast.style.padding = "8px 20px";
+        toast.style.borderRadius = "40px";
+        toast.style.zIndex = "999";
+        toast.style.fontFamily = "'Cairo', sans-serif";
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 1800);
+    }
+    
+    const submitComment = document.getElementById("submitCommentBtn");
+    const nameField = document.getElementById("guestName");
+    const msgField = document.getElementById("guestMsg");
+    
+    submitComment.addEventListener("click", async () => {
+        const nameValue = nameField.value;
+        const msgValue = msgField.value;
+        if(await addNewComment(nameValue, msgValue)) {
+            nameField.value = "";
+            msgField.value = "";
+            if(isHamzaLogged && adminPanel && !adminPanel.classList.contains("hidden")) {
+                renderCommentsForHamza();
+                const notif = document.createElement("div");
+                notif.innerText = "🎁 رسالة جديدة وصلتك يا حمزة! 🎁";
+                notif.style.position = "fixed";
+                notif.style.top = "20px";
+                notif.style.left = "20px";
+                notif.style.backgroundColor = "#f39c12";
+                notif.style.padding = "10px 20px";
+                notif.style.borderRadius = "30px";
+                notif.style.fontWeight = "bold";
+                notif.style.zIndex = "1000";
+                notif.style.fontFamily = "'Cairo', sans-serif";
+                document.body.appendChild(notif);
+                setTimeout(() => notif.remove(), 3000);
+            }
+        }
+    });
+    
+    const fbLink = document.getElementById("facebookLink");
+    if(fbLink) {
+        fbLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            window.open("https://www.facebook.com/share/14dVKxpAzER/", "_blank");
+        });
+    }
+    
+    // البالونات والجو الجميل
+    function createBalloon() {
+        const balloonEmojis = ['🎈', '🎈', '🎉', '🎊', '🎁', '🎀', '🎈', '🎂', '🧁', '🎈', '🎈'];
+        const emoji = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+        const bal = document.createElement('div');
+        bal.className = 'balloon';
+        bal.textContent = emoji;
+        const size = 35 + Math.random() * 45;
+        bal.style.fontSize = size + 'px';
+        bal.style.left = Math.random() * 100 + '%';
+        bal.style.animationDuration = 7 + Math.random() * 7 + 's';
+        bal.style.animationDelay = Math.random() * 2 + 's';
+        document.body.appendChild(bal);
+        setTimeout(() => bal.remove(), 14000);
+    }
+    
+    function startHeavyBalloons() {
+        setInterval(() => {
+            for(let i=0;i<2;i++) createBalloon();
+        }, 1000);
+        for(let i=0;i<8;i++) setTimeout(()=>createBalloon(), i*300);
+    }
+    startHeavyBalloons();
+    
+    const containerDiv = document.querySelector('.container');
+    setInterval(() => {
+        if(containerDiv) {
+            let intensity = Math.sin(Date.now() / 800) * 0.25 + 0.35;
+            containerDiv.style.boxShadow = `0 0 ${15 + intensity * 25}px rgba(255, 200, 80, 0.5)`;
+        }
+    }, 400);
+    
+    loadCommentsFromStorage();
+    if(adminPanel) adminPanel.classList.add("hidden");
+</script>
+</body>
+</html>
